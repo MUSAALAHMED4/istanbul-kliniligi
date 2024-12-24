@@ -1,0 +1,91 @@
+.event-details-container {
+  background-color: #f8f8f8;
+  padding: 20px;
+  justify-content: center; 
+  align-items: center;   
+  flex-direction: column; 
+  
+}
+
+.field-box { 
+  display: inline-block;
+  text-align: center;
+  justify-content: center; 
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.2em;
+  padding: 0.5em 1.5em;
+  border: 2px solid #9b9bda; 
+  background-color: transparent;
+  border-radius: 20px;
+  margin: 0.5em 0;
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative;
+  width: auto;
+  width: 70%;
+  max-width: 400px;
+  box-sizing: border-box;
+  max-width: 400px;
+}
+
+
+.field-box label {
+  font-size: 0.8em; 
+  position: absolute;
+  top: -12px; 
+  left: 15px;
+  background-color: #f8f8f8; 
+  padding: 0 5px;
+  color: #757575; 
+}
+
+.field-box p {
+  margin: 0;
+  padding: 0;
+  color: black; 
+}
+
+.large-box {
+  width: 70%; 
+  max-width: 400px;
+}
+
+
+.dropdown1-container {
+  position: relative;
+  width: 100%;
+}
+
+
+.dropdown1 {
+  -webkit-appearance: none; 
+  -moz-appearance: none;    
+  appearance: none;       
+  background-color: transparent; 
+  padding-right: 30px; 
+  border: none;             
+  padding: 8px;            
+  font-size: 16px;
+  width: 100%;              
+  outline: none;           
+}
+
+.dropdown1-container {
+  position: relative;  
+  display: inline-block;
+  width: 100%;
+}
+
+.dropdown1-container::after {
+  content: ''; 
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0; 
+  height: 0; 
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #6366f1; 
+  pointer-events: none; 
+}

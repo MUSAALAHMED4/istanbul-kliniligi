@@ -1,0 +1,74 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sign in{% endblock title %}
+    
+{% block content %}
+                    
+                    <div class="card overflow-hidden">
+                        <div class="bg-primary">
+                            <div class="text-primary text-center p-4">
+                                <h5 class="text-white font-size-20">Welcome Back !</h5>
+                                <p class="text-white-50">Sign in to continue to Tijuana.</p>
+                                <a href="{% url 'dashboard' %}" class="logo logo-admin">
+                                    <img src="{% static 'images/logo-sm.png' %}" height="24" alt="logo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="p-3">
+                                <form class="mt-4 needs-validation" novalidate method="POST" action="{% url 'account_login' %}">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        {{ form.login|as_crispy_field }}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ form.password|as_crispy_field }}
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                {{ form.remember|as_crispy_field }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 text-end">
+                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit">sign In</button>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-2 text-center">
+                                        <div class="signin-other-title">
+                                            <h5 class="fs-sm mb-4 title">Sign In with</h5>
+                                        </div>
+                                        <div>
+                                            {% comment %} <a href="{% provider_login_url 'google' %}" class="btn btn-danger btn-icon waves-effect waves-light"><i class="mdi mdi-google fs-lg"></i></a> {% endcomment %}
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-2 mb-0 row">
+                                        <div class="col-12 mt-4">
+                                            <a href="{% url 'account_reset_password' %}"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <p>Don't have an account ? <a href="{{ signup_url }}" class="fw-medium text-primary"> Signup now </a> </p>
+                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Tijuana. Crafted with <i class="mdi mdi-heart text-danger"></i> by Tzuchi Turkey</p>
+                    </div>
+
+{% endblock content %}
+
+  
+  
+

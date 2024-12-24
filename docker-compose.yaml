@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: tijuana
+      POSTGRES_USER: tijuana
+      POSTGRES_PASSWORD: tijuana
+
+  web:
+    build: .
+    # command: gunicorn tijuana.wsgi:application --bind 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:tijuana@tijuana:5432/tijuana
+    env_file:
+      - .env
+    
+  frontend:
+    build: ./frontend
+    env_file:
+      - .env
+    ports:
+      - "3000:80"
+    depends_on:
+      - web
+  
+  genogram_tree:
+    image: tzuchitech/excelfileserver1
+    pull_policy: always
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:

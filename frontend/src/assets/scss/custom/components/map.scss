@@ -1,0 +1,53 @@
+.map-container {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .map {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .address-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .address-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 300px;
+  }
+  
+  .address-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .address-field input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+  }
+  
+  .address-field input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  

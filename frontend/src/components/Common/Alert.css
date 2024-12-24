@@ -1,0 +1,39 @@
+/* Alert.css */
+.alert {
+  position: fixed;
+  top: 80px;  
+  left: 20px;  /* قم بتغيير 'right' إلى 'left' */
+  z-index: 9999;  
+  width: 300px;  
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+}
+
+.alert-success {
+  border-left: 5px solid #28a745;
+}
+
+.alert-error {
+  border-left: 5px solid #dc3545;
+}
+
+.alert__icon {
+  margin-right: 10px;
+}
+
+.alert__title {
+  flex-grow: 1;
+  font-size: 16px;
+  font-weight: bold;
+  color: #393a37;
+}
+
+.alert__close {
+  cursor: pointer;
+}
