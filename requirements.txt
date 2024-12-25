@@ -32,3 +32,4 @@ openpyxl==3.1.5
 
 django-import-export==4.1.1
 drf-extra-fields==3.7.0
+unidecode==1.3

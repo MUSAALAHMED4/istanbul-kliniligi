@@ -166,7 +166,7 @@ SIMPLE_JWT = {
 }
 
 
-ROOT_URLCONF = "tijuana.urls"
+ROOT_URLCONF = "klinikler.urls"
 
 TEMPLATES = [
     {
@@ -186,7 +186,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "tijuana.wsgi.application"
+WSGI_APPLICATION = "klinikler.wsgi.application"
 
 
 # Database
@@ -283,12 +283,12 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 
 #  All auth form customaization
 ACCOUNT_FORMS = {
-    "login": "tijuana.forms.UserLoginForm",
-    "signup": "tijuana.forms.UserRegistrationForm",
-    "change_password": "tijuana.forms.PasswordChangeForm",
-    "set_password": "tijuana.forms.PasswordSetForm",
-    "reset_password": "tijuana.forms.PasswordResetForm",
-    "reset_password_from_key": "tijuana.forms.PasswordResetKeyForm",
+    "login": "klinikler.forms.UserLoginForm",
+    "signup": "klinikler.forms.UserRegistrationForm",
+    "change_password": "klinikler.forms.PasswordChangeForm",
+    "set_password": "klinikler.forms.PasswordSetForm",
+    "reset_password": "klinikler.forms.PasswordResetForm",
+    "reset_password_from_key": "klinikler.forms.PasswordResetKeyForm",
 }
 
 # SMTP Configure
