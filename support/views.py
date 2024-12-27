@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from support.models import Support, SupportType, SupportCriteria, SupportApproval
-from hasta.models import Hasta, Family
+from hasta.models import Hasta
 from doktor.models import Doktor, Visit
 from django.contrib.auth.decorators import login_required
 from .serializers import SupportSerializer, SupportTypeSerializer, SupportCriteriaSerializer, SupportApprovalSerializer

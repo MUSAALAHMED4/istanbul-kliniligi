@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from doktor.models import Doktor, Visit, VisitRequester
-from hasta.models import Hasta, Family
+from hasta.models import Hasta
 from .serializers import DoktorSerializer, VisitSerializer, VisitRequesterSerializer
 from rest_framework import viewsets, status, filters
 from rest_framework.response import Response
@@ -89,7 +89,6 @@ class DoktorVisitEditView(LoginRequiredMixin, View):
         data["visit"] = Visit.objects.get(pk=pk)
         data["hastalar"] = Hasta.objects.all()
         data["doktors"] = Doktor.objects.all()
-        data["families"] = Family.objects.all()
         data["visit_requesters"] = VisitRequester.objects.all()
         return render(request, "doktor/visit-edit.html", data)
 
@@ -101,7 +100,6 @@ class DoktorVisitEditView(LoginRequiredMixin, View):
         visit = Visit.objects.get(pk=pk)
         visit.hasta_id = request.POST["hasta"]
         visit.doktor_id = request.POST["doktor"]
-        visit.family_id = request.POST["family"]
         visit.visit_purpose = request.POST["purpose"]
         visit.save()
         data["visit"] = visit
@@ -116,7 +114,6 @@ class DoktorVisitAddView(LoginRequiredMixin, View):
         data["subheading"] = "Doktor Visit"
         data["hastalar"] = Hasta.objects.all()
         data["doktor"] = Doktor.objects.all()
-        data["families"] = Family.objects.all()
         data["visit_requesters"] = VisitRequester.objects.all()
         return render(request, "doktor/visit-new.html", data)
 
@@ -128,7 +125,6 @@ class DoktorVisitAddView(LoginRequiredMixin, View):
         visit = Visit()
         visit.hasta_id = request.POST["hasta"]
         visit.doktor_id = request.POST["doktor"]
-        visit.family_id = request.POST["family"]
         # visit.visit_date = request.POST['visit_date']
         # visit.visit_requester_id = request.POST['visit_requester']
         visit.visit_requester = request.user
@@ -206,7 +202,6 @@ class VisitViewSet(viewsets.ModelViewSet):
     search_fields = [
         "doktor__hasta__first_name",
         "doktor__hasta__last_name",
-        "family__title",
         "hasta__first_name",
         "hasta__last_name",
     ]

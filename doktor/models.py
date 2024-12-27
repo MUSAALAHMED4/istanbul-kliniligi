@@ -1,11 +1,10 @@
 from django.db import models
-from hasta.models import Hasta, Family
+from hasta.models import Hasta
 from django.contrib.auth.models import User, Group
 
 
 class Doktor(models.Model):
-    hasta = models.OneToOneField(Hasta, on_delete=models.CASCADE)
-    # manager is self referential
+    hasta = models.OneToOneField("hasta.Hasta", on_delete=models.CASCADE)
     manager = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     position = models.CharField(max_length=100)
     extra_info = models.TextField(null=True, blank=True)
@@ -61,7 +60,6 @@ class VisitRequester(models.Model):
 
 class Visit(models.Model):
     doktor = models.ForeignKey(Doktor, on_delete=models.CASCADE)
-    family = models.ForeignKey(Family, on_delete=models.CASCADE, null=True, blank=True)
     hasta = models.ForeignKey(Hasta, on_delete=models.CASCADE, null=True, blank=True)
     visit_date = models.DateTimeField(auto_now_add=True)
     visit_requester = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -92,16 +90,6 @@ class Visit(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     extra_info = models.TextField(null=True, blank=True)
 
-    # class Meta:
-    # unique_together = ["doktor", "family"]
-
-    def save(self, *args, **kwargs):
-        # doktor couldn't visit his family
-        if (self.family and self.doktor.hasta.family == self.family) or (
-            self.hasta and self.doktor.hasta == self.hasta
-        ):
-            raise ValueError("doktor cannot visit his family.")
-        return super().save()
 
     def __str__(self):
         return self.created_at.strftime("%Y-%m-%d %H:%M:%S")

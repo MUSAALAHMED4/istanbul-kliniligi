@@ -30,7 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:3001",
     "http://127.0.0.1:8002",
     "http://localhost:8002",
     "https://app.tzuchitech.com",
@@ -58,10 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "corsheaders",
     # Local App
-    "e_mail",
-    "email_templates",
     "layouts",
-    "authentication",
     # Third Party App
     "crispy_forms",
     "crispy_bootstrap5",
@@ -86,9 +83,6 @@ INSTALLED_APPS = [
     "hasta",
     "doktor",
     "support",
-    "event",
-    "userprofile",
-    "import_export",
     "emergency_situation",
 ]
 
@@ -100,12 +94,12 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
 
 # Django Rest Framework
@@ -124,10 +118,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",
         "rest_framework.throttling.UserRateThrottle",
@@ -264,7 +254,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
-    # `allauth` specific authentication methods, such as login by e-mail
     # 'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -322,11 +311,8 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SWAGGER_SETTINGS = {"LOGOUT_URL": "/account/logout"}
 
-GENOGRAM_URL = "https://familytree.tzuchitech.com/api/Upload/upload-json"
-# GENOGRAM_URL = "http://localhost:8080/api/Upload/upload-json"
 GENOGRAM_API_KEY = "tztr115117"
 
-# email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "tech@tzuchiturkeydernek.org"

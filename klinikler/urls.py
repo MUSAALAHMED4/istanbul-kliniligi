@@ -25,13 +25,10 @@ from django.urls import re_path as url
 from hasta.urls import hasta_router
 from doktor.urls import doktor_router
 from support.urls import support_router
-from event.urls import event_router
 from emergency_situation.urls import situation_router
-from userprofile.urls import userprofile_router
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.conf.urls.static import static
-from userprofile.views import reset_password
 
 
 schema_view = get_schema_view(
@@ -45,8 +42,6 @@ router = DefaultRouter()
 router.registry.extend(hasta_router.registry)
 router.registry.extend(doktor_router.registry)
 router.registry.extend(support_router.registry)
-router.registry.extend(event_router.registry)
-router.registry.extend(userprofile_router.registry)
 router.registry.extend(situation_router.registry)
 router.register('dashboard', DashboardViewSet, basename='dashboard')
 
@@ -70,9 +65,6 @@ urlpatterns = [
     url(r'^$', swagger_view, name='dashboard'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     url(r'^health/', include('health_check.urls')),
-
-    # reset password
-    path('reset-password/', reset_password, name='reset_password'),
 
 ]
 

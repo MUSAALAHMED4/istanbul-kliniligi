@@ -1,6 +1,4 @@
 from django.db import models
-
-
 class EmergencySituation(models.Model):
     SUPPORT_CATEGORY_CHOICES = [
         ("relief", "Relief"),
@@ -26,10 +24,7 @@ class EmergencySituation(models.Model):
         ("monetary amount", "Monetary Amount"),
         ("custom", "Custom"),
     ]
-
-    family = models.ForeignKey(
-        "hasta.Family", on_delete=models.CASCADE, null=True, blank=True
-    )
+    
     hasta = models.ForeignKey(
         "hasta.Hasta",
         on_delete=models.CASCADE,

@@ -20,7 +20,6 @@ class SupportFactory(DjangoModelFactory):
 
     support_type = SubFactory(SupportTypeFactory)
     hasta = Hasta.objects.all()[random.randint(0, Hasta.objects.count() - 1)]
-    family = hasta.family
     visit = Visit.objects.all()[random.randint(0, Visit.objects.count() - 1)]
     doktor = Doktor.objects.all()[random.randint(0, Doktor.objects.count() - 1)]
     status = LazyAttribute(lambda x: random.choice(['pending', 'completed', 'cancelled']))

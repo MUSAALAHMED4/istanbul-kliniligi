@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import Doktor, VisitRequester, Visit
-from hasta.serializers import HastaNameSerializer, FamilyNameSerializer
+from hasta.serializers import HastaNameSerializer
 from support.serializers import SupportSerializer
 from support.models import Support
-from hasta.models import Hasta, Family
+from hasta.models import Hasta
 from django.contrib.auth.models import User
 
 class DoktorNameSerializer(serializers.ModelSerializer):
@@ -27,7 +27,6 @@ class DoktorSerializer(serializers.ModelSerializer):
 
 class VisitSerializer(serializers.ModelSerializer):
     hasta = HastaNameSerializer(read_only=True)
-    family = FamilyNameSerializer(read_only=True)
     visit_responsible = DoktorNameSerializer(read_only=True)
     visit_requester_name = serializers.SerializerMethodField()
     support = serializers.SerializerMethodField()
@@ -35,7 +34,6 @@ class VisitSerializer(serializers.ModelSerializer):
     doktor_name = serializers.SerializerMethodField()
 
     hasta_id = serializers.PrimaryKeyRelatedField(queryset=Hasta.objects.all(), source='hasta', write_only=True, required=False)
-    family_id = serializers.PrimaryKeyRelatedField(queryset=Family.objects.all(), source='family', write_only=True, required=False)
     visit_purpose = serializers.CharField(required=False)
     doktor = serializers.PrimaryKeyRelatedField(queryset=Hasta.objects.all(), required=False)
     visit_requester = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
@@ -60,7 +58,6 @@ class VisitSerializer(serializers.ModelSerializer):
         return None
     
     def update(self, instance, validated_data):
-        instance.family_id = validated_data.get('family_id', instance.family_id)
         instance.visit_purpose = validated_data.get('visit_purpose', instance.visit_purpose)
         instance.doktor = validated_data.get('doktor', instance.doktor)
         instance.visit_requester = validated_data.get('visit_requester', instance.visit_requester)
@@ -75,7 +72,6 @@ class VisitSerializer(serializers.ModelSerializer):
         if request_method == 'POST':
             # List of mandatory fields when is_draft is False
             mandatory_fields = [
-                'family',
                 'doktor',
                 'visit_purpose',
             ]

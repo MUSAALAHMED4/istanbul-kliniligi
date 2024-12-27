@@ -2,7 +2,7 @@
 import factory
 from faker import Faker
 from django.contrib.auth.models import User
-from hasta.models import Family, Hasta
+from hasta.models import Hasta
 from volunteer.models import Volunteer, VisitRequester, Visit
 from support.models import SupportType, Support, SupportCriteria, SupportApproval
 import random
@@ -17,9 +17,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     email = factory.LazyAttribute(lambda _: fake.email())
     password = factory.PostGenerationMethodCall('set_password', 'password')
 
-class FamilyFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Family
+
 
     title = factory.LazyAttribute(lambda _: fake.last_name())
 
@@ -27,7 +25,6 @@ class HastaFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Hasta
 
-    family = factory.SubFactory(FamilyFactory)
     last_name = factory.LazyAttribute(lambda _: fake.last_name())
     first_name = factory.LazyAttribute(lambda _: fake.first_name())
     date_of_birth = factory.LazyAttribute(lambda _: fake.date_of_birth())
@@ -37,7 +34,6 @@ class HastaFactory(factory.django.DjangoModelFactory):
     mobile_number = factory.LazyAttribute(lambda _: fake.phone_number())
     address = factory.LazyAttribute(lambda _: fake.address())
     location = factory.LazyAttribute(lambda _: fake.city())
-    is_head_of_family = factory.LazyAttribute(lambda _: fake.boolean())
 
 class VolunteerFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -60,7 +56,6 @@ class VisitFactory(factory.django.DjangoModelFactory):
         model = Visit
 
     volunteer = factory.SubFactory(VolunteerFactory)
-    family = factory.SubFactory(FamilyFactory)
     hasta = factory.SubFactory(HastaFactory)
     visit_requester = factory.SubFactory(UserFactory)
     visit_responsible = factory.SubFactory(VolunteerFactory)
@@ -73,7 +68,6 @@ class SupportTypeFactory(factory.django.DjangoModelFactory):
 
     name = factory.LazyAttribute(lambda _: fake.word())
     description = factory.LazyAttribute(lambda _: fake.text())
-    kind = factory.LazyAttribute(lambda _: fake.random_element(['hasta', 'family']))
 
 class SupportFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -81,7 +75,6 @@ class SupportFactory(factory.django.DjangoModelFactory):
 
     support_type = factory.SubFactory(SupportTypeFactory)
     hasta = factory.SubFactory(HastaFactory)
-    family = factory.SubFactory(FamilyFactory)
     visit = factory.SubFactory(VisitFactory)
     volunteer = factory.SubFactory(VolunteerFactory)
     status = factory.LazyAttribute(lambda _: fake.random_element(['pending', 'approved', 'rejected']))
@@ -109,14 +102,13 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tijuana.settings")
 django.setup()
 
 from factories import (
-    UserFactory, FamilyFactory, hastaFactory, VolunteerFactory,
+    UserFactory,HastaFactory, VolunteerFactory,
     VisitRequesterFactory, VisitFactory, SupportTypeFactory, SupportFactory,
     SupportCriteriaFactory, SupportApprovalFactory
 )
 
 def generate_test_data():
     # users = UserFactory.create_batch(10)
-    # families = FamilyFactory.create_batch(5)
     volunteers = VolunteerFactory.create_batch(5)
     visit_requesters = VisitRequesterFactory.create_batch(10)
     visits = VisitFactory.create_batch(10)

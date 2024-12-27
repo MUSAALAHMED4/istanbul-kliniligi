@@ -13,5 +13,5 @@ class VisitRequesterAdmin(admin.ModelAdmin):
 
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
-    search_fields = ['doktor_hastafirst_name', 'family_title', 'visit_status']
+    search_fields = ['doktor_hastafirst_name', 'visit_status']
     list_filter = ['visit_status','doktor']

@@ -6,7 +6,7 @@ import random
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tijuana.settings')
 django.setup()
 
-from hasta.models import hasta, Family
+from hasta.models import Hasta
 from doktor.models import Doktor, VisitRequester, Visit  
 
 fake = Faker()
@@ -36,14 +36,12 @@ def create_visit_requesters(n):
 
 def create_visits(n):
     doktors = list(Doktor.objects.all())
-    families = list(Family.objects.all())
     hastalar = list(Hasta.objects.all())
     requesters = list(VisitRequester.objects.all())
 
     for _ in range(n):
         visit = Visit(
             doktor=random.choice(doktors),
-            family=random.choice(families),
             hasta=random.choice(hastalar),
             visit_date=fake.date_time_this_year(),
             visit_requester=random.choice(requesters),

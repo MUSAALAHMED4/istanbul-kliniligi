@@ -9,7 +9,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.contrib.auth.decorators import login_required
-from hasta.models import Family
 from doktor.models import Doktor, Visit
 from doktor.serializers import VisitSerializer
 from support.models import SupportType
@@ -36,7 +35,6 @@ class DashboardViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=['get'])
     def stats(self, request):
-        family_count = Family.objects.count()
         visit_count = Visit.objects.count()
         doktor_count = Doktor.objects.count()
         support_type_count = SupportType.objects.count()
@@ -45,7 +43,6 @@ class DashboardViewSet(viewsets.ViewSet):
         completed_visits = Visit.objects.filter(visit_status='completed').count()
 
         response_data = {
-            'family_count': family_count,
             'visit_count': visit_count,
             'doktor_count': doktor_count,
             'support_type_count': support_type_count,
