@@ -71,6 +71,9 @@ import EventReports from "pages/report/EventReports";
 
 
 
+// Home
+import Home from "pages/Home/Home";
+
 
 const userRoutes = [
   { path: "/dashboard", component: <Dashboard /> },
@@ -135,6 +138,7 @@ const userRoutes = [
   { path: "/event-reports", component: <EventReports /> },
 
 
+
   // this route should be at the end of all other routes
   { path: "/", component: <Dashboard /> },
 ];
@@ -143,6 +147,7 @@ const userRoutes = [
  
 
 const authRoutes = [
+  { path: "/home", component: <Home /> },
   { path: "/error", component: <PagesError /> },
   { path: "/logout", component: <Logout /> },
   { path: "/login", component: <Login /> },

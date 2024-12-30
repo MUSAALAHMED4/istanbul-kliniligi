@@ -241,11 +241,7 @@ function CreateOrEditIndividual({ t, i18n }) {
         <Container fluid>
           <div className="page-title-box">
             <Row className="align-items-center mb-3">
-              <Col md={8}>
-                <h6 className="page-title">
-                  {id && id !== "new" ? t("Edit sick") : t("Create sick")}
-                </h6>
-              </Col>
+              
             </Row>
             <div
               className="form-wizard-wrapper wizard clearfix"

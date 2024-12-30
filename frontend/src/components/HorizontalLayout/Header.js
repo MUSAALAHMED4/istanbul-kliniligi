@@ -5,6 +5,9 @@ import { connect } from "react-redux"
 
 import { Link } from "react-router-dom"
 
+//i18n
+import { useTranslation } from "react-i18next"
+
 // Redux Store
 import { showRightSidebarAction, toggleLeftmenu } from "../../store/actions"
 // reactstrap
@@ -24,8 +27,9 @@ import logosmImg from "../../assets/images/logo-sm.png";
 import logolightImg from "../../assets/images/logo-light.png";
 
 const Header = props => {
+  const { t } = useTranslation();
 
-  function toggleFullscreen() {
+  function toggleFullscreen( ) {
     if (
       !document.fullscreenElement &&
       /* alternative standard method */ !document.mozFullScreenElement &&
@@ -77,47 +81,22 @@ const Header = props => {
                 </span>
               </Link>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  props.toggleLeftmenu(!props.leftMenu)
-                }}
-                className="btn btn-sm me-2 font-size-24 d-lg-none header-item waves-effect waves-light"
-                id="vertical-menu-btn"
-              >
-                <i className="mdi mdi-menu"></i>
-              </button>
               </div>
-            <div className="d-flex">
-            <form className="app-search d-none d-lg-block">
-                <div className="position-relative">
-                    <input type="text" className="form-control" placeholder="Search..." />
-                    <span className="fa fa-search"></span>
-                </div>
-            </form>
-            <LanguageDropdown />
-            <div className="dropdown d-none d-lg-inline-block">
-                <button type="button" className="btn header-item noti-icon waves-effect" onClick={() => {
-                    toggleFullscreen()
-                  }} data-bs-toggle="fullscreen">
-                    <i className="mdi mdi-fullscreen"></i>
-                </button>
+
+       
+
+              <div className="d-flex align-items-center gap-3">
+              <div className="dropdown d-inline-block">
+              <LanguageDropdown />
             </div>
-            <NotificationDropdown />      
-            <ProfileMenu />        
-            <div className="dropdown d-inline-block">
-                <button
-                  onClick={() => {
-                    props.showRightSidebarAction(!props.showRightSidebar)
-                  }}
-                  type="button"
-                  className="btn header-item noti-icon right-bar-toggle waves-effect"
-                >
-                  <i className="mdi mdi-cog-outline"></i>
-                </button>
-              </div>
-            </div>
+            {/* Buttons for Login and Appointment */}
+            <Link to="/login" className="btn btn-primary px-4 ">{t("Login")}</Link>
+
+           
           </div>
+        </div>
+      
+        
       </header>
     </React.Fragment>
   )
