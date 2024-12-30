@@ -98,15 +98,11 @@ const SidebarContent = (props) => {
     }
   };
 
-
   // Use RTL layout
   const [rtlDirection, setRtlDirection] = useState("ltr");
   useEffect(() => {
     setRtlDirection(props.i18n.language === "ar" ? "rtl" : "ltr");
   }, [props.i18n.language]);
-
-
-
 
   const activeMenu = useCallback(() => {
     let pathName = location.pathname;
@@ -170,7 +166,7 @@ const SidebarContent = (props) => {
 
   return (
     <React.Fragment>
-      <SimpleBar style={{ maxHeight: "100%" }} ref={ref}  >
+      <SimpleBar style={{ maxHeight: "100%" }} ref={ref}>
         <div id="sidebar-menu">
           <ul className="metismenu list-unstyled" id="side-menu">
             {/* <li className="menu-title">{props.t("Main")} </li> */}
@@ -205,14 +201,25 @@ const SidebarContent = (props) => {
                 <span>Individuals</span>
               </Link>
             </li> */}
-            {isEmployee && (
+
+            {!isEmployee && (
               <li>
                 <Link to="/families" className="waves-effect">
                   <i className="mdi mdi-human-male-child"></i>
-                  <span>{props.t("Families & Individuals")}</span>
+                  <span>{props.t("Book Appointment")}</span>
                 </Link>
               </li>
             )}
+
+            {!isEmployee && (
+              <li>
+                <Link to="/families/:familyId/emergency/:id" className="waves-effect">
+                <i className="mdi mdi-stethoscope"></i>
+                <span>{props.t("Doctor Dashboard")}</span>
+                </Link>
+              </li>
+            )}
+
 
             {isEmployee && (
               <li>
@@ -280,9 +287,7 @@ const SidebarContent = (props) => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/event-reports">
-                      {props.t("Event Reports")}
-                    </Link>
+                    <Link to="/event-reports">{props.t("Event Reports")}</Link>
                   </li>
                 </ul>
               </li>

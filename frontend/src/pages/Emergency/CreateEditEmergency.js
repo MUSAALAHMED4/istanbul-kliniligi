@@ -17,7 +17,6 @@ import {
 
 import { withTranslation } from "react-i18next";
 import Dropzone from "react-dropzone";
-import Alert from "components/Common/Alert";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Autocomplete from "components/Common/Autocomplete";
@@ -413,7 +412,7 @@ function CreateEditEmergency({ t }) {
             <Row className="align-items-center mb-3">
               <Col md={8}>
                 <h6 className="page-title">
-                  {id ? t("Edit Emergency") : t("Create Emergency")}
+                  {id ? t("Edit Doctor Dashboard") : t("Doctor Dashboard")}
                 </h6>{" "}
               </Col>
             </Row>
@@ -461,7 +460,7 @@ function CreateEditEmergency({ t }) {
                             : "inherit",
                         }}
                       >
-                        {t("Request Information")}
+                        {t("Prescription")}
                       </span>
                     </NavLink>
                   </NavItem>
@@ -501,7 +500,47 @@ function CreateEditEmergency({ t }) {
                             : "inherit",
                         }}
                       >
-                        {t("Emergency Details")}
+                        {t("Diagnosis")}
+                      </span>
+                    </NavLink>
+                  </NavItem>
+                  {/* Emergency Details*/}
+                  <NavItem className={activeTab === 3 ? "current" : ""}>
+                    <NavLink onClick={() => toggleTab(3)}>
+                      <span
+                        className="number"
+                        style={{
+                          border: errorFields.some((x) =>
+                            fields_tabs_mapping[3].includes(x)
+                          )
+                            ? "1px solid red"
+                            : "1px solid #ced4da",
+                          backgroundColor: errorFields.some((x) =>
+                            fields_tabs_mapping[3].includes(x)
+                          )
+                            ? "red"
+                            : "inherit",
+                          color: errorFields.some((x) =>
+                            fields_tabs_mapping[3].includes(x)
+                          )
+                            ? "white"
+                            : "inherit",
+                          borderRadius: "50%",
+                          padding: "5px 10px",
+                        }}
+                      >
+                        3.
+                      </span>
+                      <span
+                        style={{
+                          color: errorFields.some((x) =>
+                            fields_tabs_mapping[3].includes(x)
+                          )
+                            ? "red"
+                            : "inherit",
+                        }}
+                      >
+                        {t("Tests")}
                       </span>
                     </NavLink>
                   </NavItem>
@@ -520,7 +559,7 @@ function CreateEditEmergency({ t }) {
                       <div className="row mb-4">
                         <div className="col-md-2 col-12 align-content-center">
                           <p className="m-0">
-                            <strong>{t("Family")}</strong>
+                            <strong>{t("Patient's name")}</strong>
                           </p>
                         </div>
                         <div className="col-4">
@@ -556,96 +595,78 @@ function CreateEditEmergency({ t }) {
 
                       <div className="row mb-4">
                         <div className="col-md-2 col-12 align-content-center">
-                          <p className="m-0">{t("Recipient")} </p>
+                          <p className="m-0">{t("Medication Name")}</p>
                         </div>
                         <div className="col-4">
                           <div className="d-flex w-100">
                             <div className="w-100 me-2">
-                              <Autocomplete
-                                name="Recipient"
-                                searchParam="name"
-                                searchApi={false}
-                                placeholder={
-                                  emergency.individual_name ||
-                                  t("Select Recipient")
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder={t("Enter medication name")}
+                                onChange={(e) =>
+                                  updateEmergencyData(
+                                    e.target.value,
+                                    "medication_name"
+                                  )
                                 }
-                                list={individualList}
-                                selectedObject={(value) => {
-                                  if (value) {
-                                    updateEmergencyData(value, "individual_id");
-                                  } else {
-                                    updateEmergencyData(null, "individual_id");
-                                  }
-                                }}
                               />
                             </div>
                           </div>
                         </div>
                       </div>
-                      {/* applicant Section */}
-                      <div className="row mb-4">
-                        <div className="col-md-2 col-12 align-content-center">
-                          <p className="m-0">
-                            <strong>
-                              {t("applicant")}{" "}
-                              <span style={{ color: "red" }}>*</span>
-                            </strong>
-                          </p>
-                        </div>
-                        <div className="col-4">
-                          <div className="d-flex w-100">
-                            <div className="w-100 me-2">
-                              <Autocomplete
-                                name={t("applicant")}
-                                searchParam="name"
-                                placeholder={
-                                  emergency.applicant_name ||
-                                  `${t("Search a")} ${t("applicant")}`
-                                }
-                                searchApi={false}
-                                list={individualList}
-                                selectedObject={(value) => {
-                                  if (value) {
-                                    updateEmergencyData(value, "applicant_id");
-                                  } else {
-                                    updateEmergencyData(null, "applicant_id");
-                                  }
-                                }}
-                                style={{
-                                  border: errorFields.includes("applicant_id")
-                                    ? "1px solid red"
-                                    : "1px solid #ced4da",
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+
                       <div className="row mb-4">
                         <div className="col-2">
-                          <strong>{t("Emergency Type")}</strong>
+                          <strong>{t("Medication Type")}</strong>
                         </div>
                         <div className="col-4">
                           <select
                             className="form-control form-select"
-                            value={emergency.support_category}
+                            value={emergency.medication_type}
                             onChange={(e) =>
                               updateEmergencyData(
                                 e.target.value,
-                                "support_category"
+                                "medication_type"
                               )
                             }
                             required
                           >
                             <option value="">{t("Select Type")}</option>
-                            {getEmergencyTypeOptions(t).map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {t(option.label)}
-                              </option>
-                            ))}
+                            <option value="pill">{t("Pill")}</option>
+                            <option value="syrup">{t("Syrup")}</option>
+                            <option value="injection">{t("Injection")}</option>
                           </select>
                         </div>
                       </div>
+
+                      <div className="row mb-4">
+                        <div className="col-2">
+                          <strong>{t("Instructions")}</strong>
+                        </div>
+                        <div className="col-4">
+                          <select
+                            className="form-control form-select"
+                            value={emergency.instructions}
+                            onChange={(e) =>
+                              updateEmergencyData(
+                                e.target.value,
+                                "instructions"
+                              )
+                            }
+                            required
+                          >
+                            <option value="">{t("Select Instructions")}</option>
+                            <option value="after_meal">
+                              {t("After Meal")}
+                            </option>
+                            <option value="before_meal">
+                              {t("Before Meal")}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
                       <div className="row mb-4">
                         <div className="col-2">
                           <strong>{t("Description")}</strong>
@@ -777,172 +798,84 @@ function CreateEditEmergency({ t }) {
                     <TabPane tabId={2}>
                       <div className="row mb-4">
                         <div className="col-2">
-                          <strong>{t("Status")}</strong>
-                        </div>
-                        <div className="col-4">
-                          <select
-                            className={`form-control form-select ${
-                              !emergency.status ? "is-invalid" : ""
-                            }`}
-                            value={emergency.status}
-                            onChange={(e) =>
-                              updateEmergencyData(e.target.value, "status")
-                            }
-                            required
-                          >
-                            <option value="">{t("Select Status")}</option>
-                            {getStatusOptions(t).map((option, index) => (
-                              <option
-                                disabled={
-                                  (["rejected", "approved"].includes(
-                                    emergency.status
-                                  ) &&
-                                    option.value !== emergency.status) ||
-                                  getStatusOptions(t).findIndex(
-                                    (o) => o.value === emergency.status
-                                  ) > index
-                                }
-                                key={option.value}
-                                value={option.value}
-                              >
-                                {renderStatusIcon(option.value)}{" "}
-                                {t(option.label)}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
-                      {showStudyResult && (
-                        <div className="row mb-4">
-                          <div className="col-2">
-                            <strong>{t("Study Result")}</strong>
-                          </div>
-                          <div className="col-4">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder={t("Enter Study Result")}
-                              value={emergency.study_result || ""}
-                              onChange={(e) =>
-                                updateEmergencyData(
-                                  e.target.value,
-                                  "study_result"
-                                )
-                              }
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {/* Support Type */}
-                      <div className="row mb-4">
-                        <div className="col-2">
-                          <strong>{t("Support Type")}</strong>
+                          <strong>{t("Blood Type")}</strong>
                         </div>
                         <div className="col-4">
                           <select
                             className="form-control form-select"
-                            value={emergency.support_type || ""}
+                            value={emergency.blood_type}
                             onChange={(e) =>
-                              updateEmergencyData(
-                                e.target.value,
-                                "support_type"
-                              )
+                              updateEmergencyData(e.target.value, "blood_type")
                             }
                             required
                           >
-                            <option value="">{t("Select Support Type")}</option>
-                            <option value="bim">{t("bim cards")}</option>
-                            <option value="cash">{t("monetary amount")}</option>
-                            <option value="custom">{t("Custom")}</option>
+                            <option value="">{t("Select Blood Type")}</option>
+                            <option value="A+">{t("A+")}</option>
+                            <option value="A-">{t("A-")}</option>
+                            <option value="B+">{t("B+")}</option>
+                            <option value="B-">{t("B-")}</option>
+                            <option value="AB+">{t("AB+")}</option>
+                            <option value="AB-">{t("AB-")}</option>
+                            <option value="O+">{t("O+")}</option>
+                            <option value="O-">{t("O-")}</option>
                           </select>
                         </div>
                       </div>
-                      {emergency.support_type === "custom" && (
-                        <div className="row mb-4">
-                          <div className="col-2">
-                            <strong>{t("Enter Support Type")}</strong>{" "}
-                          </div>
-                          <div className="col-4">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder={t("Enter custom support type")}
-                              value={emergency.custom_support_type || ""}
-                              onChange={(e) =>
-                                updateEmergencyData(
-                                  e.target.value,
-                                  "custom_support_type"
-                                )
-                              }
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {/* Support Duration */}
+
                       <div className="row mb-4">
                         <div className="col-2">
-                          <strong>{t("Support Duration")}</strong>
+                          <strong>{t("Symptoms")}</strong>
                         </div>
-                        <div className="col-4 d-flex">
-                          <input
-                            type="number"
-                            min="1"
-                            max="5"
-                            className="form-control me-2"
-                            placeholder={t("Enter duration")}
-                            value={emergency.support_duration || ""}
+                        <div className="col-4">
+                          <textarea
+                            className="form-control"
+                            rows="3"
+                            placeholder={t("Enter symptoms")}
                             onChange={(e) =>
-                              updateEmergencyData(
-                                e.target.value,
-                                "support_duration"
-                              )
+                              updateEmergencyData(e.target.value, "symptoms")
                             }
-                            required
-                            disabled={emergency.durationUnit === "custom"}
-                          />
-                          <select
-                            className="form-control form-select"
-                            value={emergency.support_duration_type || "month"}
-                            onChange={(e) =>
-                              updateEmergencyData(
-                                e.target.value,
-                                "support_duration_type"
-                              )
-                            }
-                            required
-                          >
-                            <option value="day">{t("Day(s)")}</option>
-                            <option value="week">{t("Week(s)")}</option>
-                            <option value="month">{t("Month(s)")}</option>
-                            <option value="year">{t("Year(s)")}</option>
-                            <option value="custom">{t("Custom")}</option>{" "}
-                          </select>
+                          ></textarea>
                         </div>
                       </div>
-                      {/*  "custom" */}
-                      {emergency.support_duration_type === "custom" && (
-                        <div className="row mb-4">
-                          <div className="col-2">
-                            <strong>{t("Enter Custom Duration")}</strong>
-                          </div>
-                          <div className="col-4">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder={t("Enter custom duration")}
-                              value={
-                                emergency.custom_duration_description || ""
-                              }
-                              onChange={(e) =>
-                                updateField(
-                                  e.target.value,
-                                  "custom_duration_description"
-                                )
-                              }
-                            />
-                          </div>
+
+                      <div className="row mb-4">
+                        <div className="col-2">
+                          <strong>{t("Chief Complaint")}</strong>
                         </div>
-                      )}
+                        <div className="col-4">
+                          <textarea
+                            className="form-control"
+                            rows="3"
+                            placeholder={t("Enter chief complaint")}
+                            onChange={(e) =>
+                              updateEmergencyData(
+                                e.target.value,
+                                "chief_complaint"
+                              )
+                            }
+                          ></textarea>
+                        </div>
+                      </div>
+
+                      <div className="row mb-4">
+                        <div className="col-2">
+                          <strong>{t("Final Diagnosis")}</strong>
+                        </div>
+                        <div className="col-4">
+                          <textarea
+                            className="form-control"
+                            rows="3"
+                            placeholder={t("Enter final diagnosis")}
+                            onChange={(e) =>
+                              updateEmergencyData(
+                                e.target.value,
+                                "final_diagnosis"
+                              )
+                            }
+                          ></textarea>
+                        </div>
+                      </div>
+
                       {/* Decision Upload   */}
                       <div className="row mb-4">
                         <div className="col-2">
@@ -1022,17 +955,66 @@ function CreateEditEmergency({ t }) {
                           </div>
                         </div>
                       </div>
-                      {/* Save Button */}
-                      <div
-                        className="d-flex align-items-center gap-3 mt-3"
-                        style={{ justifyContent: "flex-start" }}
-                      >
-                        <Link
-                          to="/create-support-type"
-                          className="btn btn-info"
-                        >
-                          {t("Create Support")}
-                        </Link>
+                    </TabPane>
+                    <TabPane tabId={3}>
+                      <div className="row mb-4">
+                        <div className="col-2">
+                          <strong>{t("Test Type")}</strong>
+                        </div>
+                        <div className="col-4">
+                          <select
+                            className="form-control form-select"
+                            value={emergency.test_type}
+                            onChange={(e) =>
+                              updateEmergencyData(e.target.value, "test_type")
+                            }
+                            required
+                          >
+                            <option value="">{t("Select Test Type")}</option>
+                            <option value="blood_test">
+                              {t("Blood Test")}
+                            </option>
+                            <option value="urine_test">
+                              {t("Urine Test")}
+                            </option>
+                            <option value="x_ray">{t("X-Ray")}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="row mb-4">
+                        <div className="col-2">
+                          <strong>{t("Test Results")}</strong>
+                        </div>
+                        <div className="col-4">
+                          <textarea
+                            className="form-control"
+                            rows="3"
+                            placeholder={t("Enter test results")}
+                            onChange={(e) =>
+                              updateEmergencyData(
+                                e.target.value,
+                                "test_results"
+                              )
+                            }
+                          ></textarea>
+                        </div>
+                      </div>
+
+                      <div className="row mb-4">
+                        <div className="col-2">
+                          <strong>{t("Test Date")}</strong>
+                        </div>
+                        <div className="col-4">
+                          <input
+                            type="date"
+                            className="form-control"
+                            value={emergency.test_date}
+                            onChange={(e) =>
+                              updateEmergencyData(e.target.value, "test_date")
+                            }
+                          />
+                        </div>
                       </div>
                     </TabPane>
                   </TabContent>
@@ -1060,7 +1042,7 @@ function CreateEditEmergency({ t }) {
               </div>
               <div>
                 <Button
-                  className={activeTab === 2 ? "next disabled" : "next"}
+                  className={activeTab === 3 ? "next disabled" : "next"}
                   onClick={() => toggleTab(activeTab + 1)}
                 >
                   {t("Next")}

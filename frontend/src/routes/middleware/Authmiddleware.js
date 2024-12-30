@@ -58,9 +58,9 @@ const Authmiddleware = (props) => {
     //     }
     // }, [expirationTime, updateToken]);    
 
-    if (!isUserAuthenticated()) {
-        return <Navigate to="/login" replace={true} />;
-    }
+    // if (!isUserAuthenticated()) {
+    //     return <Navigate to="/login" replace={true} />;
+    // }
 
     return (
         <React.Fragment>
