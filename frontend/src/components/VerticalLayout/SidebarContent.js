@@ -214,8 +214,8 @@ const SidebarContent = (props) => {
             {!isEmployee && (
               <li>
                 <Link to="/families/:familyId/emergency/:id" className="waves-effect">
-                <i className="mdi mdi-stethoscope"></i>
-                <span>{props.t("Doctor Dashboard")}</span>
+                  <i className="mdi mdi-stethoscope"></i>
+                  <span>{props.t("Doctor Dashboard")}</span>
                 </Link>
               </li>
             )}
@@ -225,7 +225,15 @@ const SidebarContent = (props) => {
               <li>
                 <Link to="/volunteers" className="waves-effect">
                   <i className="fas fa-user-edit"></i>
-                  <span>{props.t("Volunteers")}</span>
+                  <span>{props.t("Doktors")}</span>
+                </Link>
+              </li>
+            )}
+            {isEmployee && (
+              <li>
+                <Link to="/volunteers" className="waves-effect">
+                  <i className="fas fa-heartbeat"></i>
+                  <span>{props.t("Sick")}</span>
                 </Link>
               </li>
             )}
@@ -238,64 +246,10 @@ const SidebarContent = (props) => {
                 </Link>
               </li>
             )}
-
-            {isEmployee && (
-              <li>
-                <Link to="#" className="has-arrow waves-effect">
-                  <i className="fas fa-hand-holding-heart"></i>
-                  <span>{props.t("Supports")}</span>
-                </Link>
-                <ul className="sub-menu" aria-expanded="false">
-                  {/* <li>
-                  <Link to="/supports">Supports</Link>
-                </li> */}
-                  <li>
-                    <Link to="/support-types">{props.t("Support Types")}</Link>
-                  </li>
-                  <li>
-                    <Link to="/support-criteria">
-                      {props.t("Supports Criteria")}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/events">{props.t("Events")}</Link>
-                  </li>
-                </ul>
-              </li>
-            )}
-
-            {isEmployee && (
-              <li>
-                <Link to="#" className="has-arrow waves-effect">
-                  <i className="fas fa-file-alt"></i>
-                  <span>{props.t("Reports")}</span>
-                </Link>
-                <ul className="sub-menu" aria-expanded="false">
-                  <li>
-                    <Link to="/individual-reports">
-                      {props.t("Individuals Reports")}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/family-reports">
-                      {props.t("Family Reports")}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/support-reports">
-                      {props.t("Support Reports")}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/event-reports">{props.t("Event Reports")}</Link>
-                  </li>
-                </ul>
-              </li>
-            )}
           </ul>
         </div>
-      </SimpleBar>
-    </React.Fragment>
+      </SimpleBar >
+    </React.Fragment >
   );
 };
 

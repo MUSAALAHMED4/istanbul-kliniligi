@@ -200,8 +200,7 @@ function CreateOrEditIndividual({ t, i18n }) {
   const handleAddNewIndividual = () => {
     setShowModal(false);
     navigate(
-      `/individual/new?family=${newIndFamilyId}${
-        visitId ? `&visit=${visitId}` : ""
+      `/individual/new?family=${newIndFamilyId}${visitId ? `&visit=${visitId}` : ""
       }`,
       { replace: true }
     );
@@ -693,8 +692,8 @@ function CreateOrEditIndividual({ t, i18n }) {
                               dateFormat: "Y-m-d",
                               defaultDate: individual.date_of_birth
                                 ? moment(individual.date_of_birth).format(
-                                    "YYYY-MM-DD"
-                                  )
+                                  "YYYY-MM-DD"
+                                )
                                 : null,
                               locale: {
                                 weekdays: {
@@ -722,11 +721,10 @@ function CreateOrEditIndividual({ t, i18n }) {
                         {/*  Gender */}
                         <div className="col-4">
                           <select
-                            className={`form-control form-select ${
-                              isFormSubmitted && !individual.gender
+                            className={`form-control form-select ${isFormSubmitted && !individual.gender
                                 ? "is-invalid"
                                 : ""
-                            }`}
+                              }`}
                             value={individual.gender}
                             onChange={(e) => {
                               updateServerParams(e.target.value, "gender");
@@ -754,11 +752,10 @@ function CreateOrEditIndividual({ t, i18n }) {
                         <div className="col-4">
                           <input
                             type="text"
-                            className={`form-control ${
-                              isFormSubmitted && errorFields.includes("father")
+                            className={`form-control ${isFormSubmitted && errorFields.includes("father")
                                 ? "is-invalid"
                                 : ""
-                            }`}
+                              }`}
                             name="Father"
                             placeholder={
                               individual?.father_name ||
@@ -781,11 +778,10 @@ function CreateOrEditIndividual({ t, i18n }) {
                         <div className="col-4">
                           <input
                             type="text"
-                            className={`form-control ${
-                              isFormSubmitted && errorFields.includes("mother")
+                            className={`form-control ${isFormSubmitted && errorFields.includes("mother")
                                 ? "is-invalid"
                                 : ""
-                            }`}
+                              }`}
                             name="Mother"
                             placeholder={
                               individual?.mother_name ||
@@ -816,11 +812,10 @@ function CreateOrEditIndividual({ t, i18n }) {
                         </div>
                         <div className="col-4">
                           <select
-                            className={`form-control form-select ${
-                              isFormSubmitted && !individual.clinic_name
+                            className={`form-control form-select ${isFormSubmitted && !individual.clinic_name
                                 ? "is-invalid"
                                 : ""
-                            }`}
+                              }`}
                             value={individual.clinic_name}
                             onChange={(e) =>
                               updateServerParams(e.target.value, "clinic_name")
@@ -832,7 +827,7 @@ function CreateOrEditIndividual({ t, i18n }) {
                             }}
                           >
                             <option value="">{t("Select a Specialty")}</option>
-                            <option value="Endocrinology and Diabetes">
+                            <option value="Endocrinology_and_Diabetes">
                               {t("Endocrinology and Diabetes")}
                             </option>
                             <option value="Cardiology">
@@ -860,11 +855,10 @@ function CreateOrEditIndividual({ t, i18n }) {
                         </div>
                         <div className="col-4">
                           <select
-                            className={`form-control form-select ${
-                              isFormSubmitted && !individual.doctor
+                            className={`form-control form-select ${isFormSubmitted && !individual.doctor
                                 ? "is-invalid"
                                 : ""
-                            }`}
+                              }`}
                             value={individual.doctor}
                             onChange={(e) =>
                               updateServerParams(e.target.value, "doctor")
@@ -909,8 +903,8 @@ function CreateOrEditIndividual({ t, i18n }) {
                               dateFormat: "Y-m-d",
                               defaultDate: individual.date_of_birth
                                 ? moment(individual.date_of_birth).format(
-                                    "YYYY-MM-DD"
-                                  )
+                                  "YYYY-MM-DD"
+                                )
                                 : null,
                               locale: {
                                 weekdays: {

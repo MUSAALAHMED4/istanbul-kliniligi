@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState ,  useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 import { connect } from "react-redux";
 import { Form, Dropdown, DropdownMenu, DropdownItem, DropdownToggle, Input, Button } from "reactstrap";
@@ -95,11 +95,11 @@ const Header = props => {
               <Link to="/" className="logo logo-light">
                 <span className="logo-sm">
                   {/* <img src={logosmImg} alt="" height="22" /> */}
-                  <h4 className='text-white my-4'>TCF</h4>
+                  <h4 className='text-white my-4'>IC</h4>
                 </span>
                 <span className="logo-lg">
                   {/* <img src={logolightImg} alt="" height="18" /> */}
-                  <h4 className='text-white my-4'>{props.t("Tzu Chi Foundation")}</h4>
+                  <h3 className='text-white my-4'>{props.t("Istanbul Clinics")}</h3>
                 </span>
               </Link>
             </div>
@@ -162,7 +162,7 @@ const Header = props => {
                 tag="button"
               > <i className="mdi mdi-magnify"></i>
               </DropdownToggle>
-              
+
               <DropdownMenu className="dropdown-menu-lg dropdown-menu-end p-0">
                 <Form className="p-3">
                   <div className="form-group m-0">
