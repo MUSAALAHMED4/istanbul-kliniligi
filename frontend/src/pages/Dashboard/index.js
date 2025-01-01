@@ -50,7 +50,7 @@ const Dashboard = (props) => {
                 <ol className="breadcrumb m-0">
                   <li className="breadcrumb-item active">
                     {props.t("Welcome to")}{" "}
-                    <strong>{props.t("Tzu Chi Foundation")}</strong>{" "}
+                    <strong>{props.t("Istanbul Clinics")}</strong>{" "}
                     {props.t("Dashboard")}
                   </li>
                 </ol>
@@ -98,7 +98,7 @@ const Dashboard = (props) => {
                           <i className="mdi mdi-human-male-child h3"></i>
                         </div>
                         <h5 className="font-size-16 text-uppercase mt-0 text-white-50">
-                          {props.t("Families")}
+                          {props.t("sick")}
                         </h5>
                         <h4 className="fw-medium font-size-24">
                           {dashboardData?.family_count}{" "}
@@ -126,7 +126,7 @@ const Dashboard = (props) => {
                           <i className="fas fa-user-edit h3"></i>
                         </div>
                         <h5 className="font-size-16 text-uppercase mt-0 text-white-50">
-                          {props.t("Volunteers")}
+                          {props.t("Doktors")}
                         </h5>
                         <h4 className="fw-medium font-size-24">
                           {dashboardData?.volunteer_count}
@@ -154,7 +154,7 @@ const Dashboard = (props) => {
                           <i className="fas fa-hand-holding-heart h3"></i>
                         </div>
                         <h5 className="font-size-16 text-uppercase mt-0 text-white-50">
-                          {props.t("Support Type")}
+                          {props.t("clinics")}
                         </h5>
                         <h4 className="fw-medium font-size-24">
                           {dashboardData?.support_type_count}
@@ -179,7 +179,7 @@ const Dashboard = (props) => {
                 </Col>
               </Row>
               <Row>
-                <Col md={9}>
+                <Col md={12}>
                   <Card>
                     <CardBody>
                       <h4 className="card-title mb-4">
@@ -194,11 +194,11 @@ const Dashboard = (props) => {
                                 {moment(visit.visit_date).format("YYYY.MM.DD")}
                               </span>
                               <span className="activity-text">
-                                <strong>{props.t("Family")}:</strong>{" "}
+                                <strong>{props.t("sick")}:</strong>{" "}
                                 {visit.family.title}
                               </span>
                               <p className="activity-text m-0">
-                                <strong>{props.t("Volunteer")}::</strong>{" "}
+                                <strong>{props.t("sick")}::</strong>{" "}
                                 {visit.volunteer_name}
                               </p>
                             </div>
@@ -209,20 +209,6 @@ const Dashboard = (props) => {
                         <Link to="/visits" className="btn btn-primary">
                           {props.t("See More")}
                         </Link>
-                      </div>
-                    </CardBody>
-                  </Card>
-                </Col>
-                <Col md={3}>
-                  <Card className="bg-primary">
-                    <CardBody>
-                      <div className="text-center text-white py-4">
-                        <h5 className="mt-0 mb-4 text-white-50 font-size-16">
-                          {props.t("Successfully Completed Visits")}
-                        </h5>
-                        <h1>{dashboardData?.completed_visits}</h1>
-                        <p className="font-size-18 pt-1">{props.t("Visit")}</p>
-                        <p className="text-white-50 mb-0"></p>
                       </div>
                     </CardBody>
                   </Card>
