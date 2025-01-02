@@ -17,19 +17,18 @@ class Doktor(models.Model):
 
 
     # Doktor information
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50 , null=True)
     place_of_birth = models.CharField(max_length=50, null=True)
     national_id = models.CharField(max_length=15, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     place_of_birth = models.CharField(max_length=50, null=True)
     gender = models.CharField(max_length=50, choices=GENDER_CHOICES, null=True, blank=True)
-    father = models.CharField(max_length=50)
-    mother = models.CharField(max_length=50)
+    father = models.CharField(max_length=50 , null=True)
+    mother = models.CharField(max_length=50 , null=True)
     # contact information
     mobile_number = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
-    address = models.TextField(null=True, blank=True)
     # clinic information
     specialization = models.CharField(max_length=50, blank=True)
     clinic_name = models.CharField(max_length=50, blank=True)
