@@ -110,6 +110,7 @@
     "react-image-crop": "^11.0.7",
     "react-image-lightbox": "^5.1.4",
     "react-modal": "^3.16.1",
+    "react-parallax-tilt": "^1.7.269",
     "react-webcam": "^7.2.0",
     "reactstrap": "^9.2.3",
     "select2": "^4.1.0-rc.0",

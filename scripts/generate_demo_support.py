@@ -19,9 +19,7 @@ class SupportFactory(DjangoModelFactory):
         model = 'support.Support'
 
     support_type = SubFactory(SupportTypeFactory)
-    hasta = Hasta.objects.all()[random.randint(0, Hasta.objects.count() - 1)]
-    visit = Visit.objects.all()[random.randint(0, Visit.objects.count() - 1)]
-    doktor = Doktor.objects.all()[random.randint(0, Doktor.objects.count() - 1)]
+
     status = LazyAttribute(lambda x: random.choice(['pending', 'completed', 'cancelled']))
     start_date = LazyAttribute(lambda x: timezone.now())
     end_date = LazyAttribute(lambda x: x.start_date + timedelta(days=random.randint(1, 30)))

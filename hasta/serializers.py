@@ -3,34 +3,7 @@ from .models import (
     Hasta,
 )
 
-
-class HastaSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    doktor_name = serializers.SerializerMethodField()
-    visit_date = serializers.SerializerMethodField()
-    visit_id = serializers.SerializerMethodField()
-
-    def get_visit_id(self, obj):
-        if obj.last_updated_by_visit:
-            return obj.last_updated_by_visit.id
-
-    def get_doktor_name(self, obj):
-        if obj.last_updated_by_visit:
-            return obj.last_updated_by_visit.doktor.hasta.name
-
-    def get_visit_date(self, obj):
-        if obj.last_updated_by_visit:
-            return obj.last_updated_by_visit.visit_date
-
-    def get_father(self, obj):
-        if obj.father:
-            return obj.father
-        return None
-
-    def get_name(self, obj):
-        return obj.name
-
-    class Meta:
+class Meta:
         model = Hasta
         fields = "__all__"
         extra_kwargs = {

@@ -83,7 +83,6 @@ INSTALLED_APPS = [
     "health_check.contrib.migrations",
     "hasta",
     "doktor",
-    "support",
     "emergency_situation",
 ]
 

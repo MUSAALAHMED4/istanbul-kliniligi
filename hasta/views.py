@@ -14,9 +14,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import viewsets, filters
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from .serializers import (
-    HastaSerializer,
-)
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
@@ -29,7 +26,6 @@ from rest_framework import generics
 class HastaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Hasta.objects.all()
-    serializer_class = HastaSerializer
     http_method_names = ["get", "post", "put"]
     search_fields = ["first_name", "last_name", "national_id"]
     filter_backends = [filters.SearchFilter]

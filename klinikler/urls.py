@@ -18,13 +18,12 @@ from django.urls import path,include
 from .views import swagger_view
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
-from .views import MyTokenObtainPairView, DashboardViewSet
+from .views import MyTokenObtainPairView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.urls import re_path as url
 from hasta.urls import hasta_router
 from doktor.urls import doktor_router
-from support.urls import support_router
 from emergency_situation.urls import situation_router
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -41,9 +40,7 @@ schema_view = get_schema_view(
 router = DefaultRouter()
 router.registry.extend(hasta_router.registry)
 router.registry.extend(doktor_router.registry)
-router.registry.extend(support_router.registry)
 router.registry.extend(situation_router.registry)
-router.register('dashboard', DashboardViewSet, basename='dashboard')
 
 
 urlpatterns = [
